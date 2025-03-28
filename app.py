@@ -1,4 +1,3 @@
-# app.py
 import gradio as gr
 import time
 from llm_interface import get_response
@@ -29,6 +28,7 @@ def show_preview(file):
 
 with gr.Blocks() as demo:
     gr.Markdown("Face LLM Demo (Streaming + Media Preview)")
+    gr.Markdown("Upload an image or video and ask a question! Try one of the sample prompts below:")
 
     file_input = gr.File(label="Upload Image or Video", type="filepath")
 
@@ -37,6 +37,19 @@ with gr.Blocks() as demo:
         video_preview = gr.Video(label="Video Preview", visible=False, scale=0.2)
 
     prompt_input = gr.Textbox(label="Text Prompt", placeholder="Ask something...")
+    
+    examples = gr.Examples(
+        examples=[
+            ["What emotion is this person showing?"],
+            ["Can you describe the facial expression?"],
+            ["Is the person happy or sad in this image?"],
+            ["What might this person be thinking based on their face?"],
+            ["Can you analyze the mood in this video?"]
+        ],
+        inputs=[prompt_input],
+        label="Sample Prompts"
+    )
+
     submit = gr.Button("Submit")
     output = gr.Textbox(label="Model Response", lines=6)
 

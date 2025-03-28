@@ -31,8 +31,10 @@ with gr.Blocks() as demo:
     gr.Markdown("Face LLM Demo (Streaming + Media Preview)")
 
     file_input = gr.File(label="Upload Image or Video", type="filepath")
-    image_preview = gr.Image(label="Image Preview", visible=False)
-    video_preview = gr.Video(label="Video Preview", visible=False)
+
+    with gr.Row():
+        image_preview = gr.Image(label="Image Preview", visible=False, scale=0.2)
+        video_preview = gr.Video(label="Video Preview", visible=False, scale=0.2)
 
     prompt_input = gr.Textbox(label="Text Prompt", placeholder="Ask something...")
     submit = gr.Button("Submit")
